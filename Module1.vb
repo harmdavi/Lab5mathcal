@@ -13,7 +13,7 @@ Module Module1
 
         Format("Scientific")
 
-        Console.WriteLine("Maunuel mode? Y/N")
+        Console.WriteLine("Manual mode? Y/N")
         Userinput = Console.ReadLine()
         If Userinput = "y" Then
 
@@ -84,7 +84,7 @@ Module Module1
         Console.WriteLine($"IR22 = { IR22}")
         Console.WriteLine("IR22 = IC of Darlington Pair")
 
-        Console.WriteLine("Maunuel mode for Transistor Beta Entry? Y/N")
+        Console.WriteLine("Manual mode for Transistor Beta Entry? Y/N")
         Userinput = Console.ReadLine()
         If Userinput = "y" Then
             Console.WriteLine($"Beta Q4?")
@@ -97,13 +97,14 @@ Module Module1
             BetaQ6 = Console.ReadLine
         Else
             BetaQ4 = 250
-            BetaQ5 = 200
+            BetaQ5 = 250
             BetaQ6 = 30
         End If
 
         BetaDarlington = BetaQ5 * BetaQ6
 
-        IBQ5 = IR22 / BetaDarlington
+        'IBQ5 = IR22 / BetaDarlington
+        IBQ5 = IR21 / 10
         Console.WriteLine($"IBQ5 = { IBQ5}")
 
         ICQ5 = IBQ5 * BetaQ5
@@ -142,13 +143,13 @@ Module Module1
         rPrimeEQ6 = 0.026 / IEQ6
         Console.WriteLine($"r'eQ6 = { rPrimeEQ6}")
 
-        Console.WriteLine("This Part can change basied on sourcecode")
+        Console.WriteLine("This Part can change based on sourcecode")
         Console.ReadLine()
 
         'These formulas are based of what Lane and Rob did Together.
 
 
-        VoutQ4 = ((R21) ^ -1 + (BetaQ5 * (rPrimeEQ5 + (BetaQ6 * rPrimeEQ6))) ^ -1) ^ -1
+        VoutQ4 = (R21 ^ -1 + (BetaQ5 * (rPrimeEQ5 + (BetaQ6 * rPrimeEQ6))) ^ -1) ^ -1
         Console.WriteLine($"VoutQ4 (In Terms of Resistance) = { VoutQ4} ohms")
         'R21//(BetaQ5*(r'eQ5 + (BetaQ6)*(r'eQ6)))
 
@@ -159,7 +160,8 @@ Module Module1
         AVQ4 = VoutQ4 / VinQ4
         Console.WriteLine($"AVQ4 = { AVQ4}")
 
-        VoutDarlington = ((R22) ^ -1 + ((R18 + ((R17 + Rgen) ^ -1 + rPrimeEQ4) ^ -1) ^ -1) ^ -1)
+
+        VoutDarlington = ((R22 ^ -1) + (R18 + (rPrimeEQ4 ^ -1 + (R17 + Rgen) ^ -1) ^ -1) ^ -1) ^ -1
         Console.WriteLine($"VoutDarlington (in terms of Resistance) = { VoutDarlington} Ohms")
         'R22//(R18+(R17+R18)//r'eQ4))
 
@@ -176,7 +178,6 @@ Module Module1
 
 
         Console.ReadLine()
-
 
 
 
